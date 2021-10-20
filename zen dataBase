@@ -1,0 +1,151 @@
+zen class database 
+
+created tables for 
+// users - storeing student data
+// topics - topics taught in zen class its day and status whether //it is completed or pending
+// tasks - storeing tasks for each taught topic
+//recording - link for each respective taught topic is stored 
+// company drives - visited company drives
+// attendance - attendance of each student for the company drive
+//mentors - storeing assigned mentor to each student
+
+
+
+//users 
+
+create table user (
+id integer auto_increment,
+stud_id integer,
+Username varchar(40),
+email varchar(50),
+contact integer,
+primary key (id)
+);
+
+insert into user (stud_id , Username ,  email ,contact ) 
+values ( 1 , "Mahesh Patil" , "maheshpatil123@gmail.com" , 123654785),
+( 2 , "Deepak Sankpal" , "deepak34232@gmail.com" , 135284796),
+(3 , "Rakesh Dalavi" , "dalavirakesh22@gmail.com" , 256478931),
+( 4 , "Prasad Dhanawade" , "prasad54yt@gmail.com" , 254178524),
+( 5 , "Sanket Chavan" , "sanketbond345@gmail.com" , 458712367),
+( 6 , "Utkarsh Shinde" , "utkarshshinde3@gmail.com" , 236478159)
+
+
+
+//topics
+
+create table Topics (id integer auto_increment,
+Topic varchar(100),
+Week_Days varchar(100),
+Completion_Status  varchar(100),
+primary key(id)
+);
+
+insert into Topics ( Topic ,Week_Days , Completion_Status) 
+values("HTML" , "Monday" , "Completed"),
+("Css and Javascript" , "Tuesday" , "Completed"),
+("React" , "Wednesday" , "Completed" ),
+("Mysql" , "Thursday" , "Completed"),
+("MongoDB" , "Friday" , "Completed"),
+("NodeJs" , "Saturday" , "Pending")
+
+
+// creating tasks related to each respective topics
+
+create table tasks (id integer auto_increment,
+Topic_id integer ,
+Tasks varchar (100),
+primary key (id),
+foreign key(Topic_id) references topics (id)
+);
+
+insert into tasks (Topic_id , Tasks )
+values ( 1 ,"task1"),
+(2,"task2"),
+(3 , "task3 "),
+(4 , "task4 " ),
+(5 , "task5" ),
+(6 , "task6" )
+
+//recording links for respective topics
+
+create table recording (id integer auto_increment,
+Topic_id integer ,
+link varchar (100),
+primary key (id),
+foreign key(Topic_id) references topics (id)
+);
+
+insert into recording (Topic_id , link )
+values ( 1 ,"https://zenclass1Recording.com"),
+(2,"https://zentopicewddda2Recording.com"),
+(3 , "https://zenclasseqwe3Recording.com "),
+(4 , "https://zenclass2qwwRecording.com " ),
+(5 , "https://zenclassweqweqwRecording.com" ),
+(6 , "not yet completed" )
+
+//mentors data
+
+create table mentors (id integer auto_increment,
+Mentor_Name varchar(100),
+Student_id integer,
+primary key (id),
+foreign key (Student_id) references users(id)
+);
+
+insert into mentors ( Mentor_Name , Student_Id)
+values("Nilesh" , 1),
+("Nilesh" , 2),
+("Akshay" , 3),
+("Nayan" , 4),
+("Nayan" , 5),
+("Venkat" , 6)
+
+
+//company drives data
+
+create table company_drives(id integer auto_increment,
+company_name varchar (50),
+drive_month varchar (15),
+primary key (id)
+);
+
+insert into company_drives(company_name , drive_month)
+values("TCS " , "jan" ),
+("Wipro" , "feb"),
+("Infosys" ,  "march" ),
+("Flipcart" , "April"),
+("Amazon" , "May" ),
+("Zoho" , "jun")
+
+//attendance for company drive
+
+
+//attendance table
+
+use students;
+create table attendance (id integer auto_increment,
+user_id integer,
+company_id integer,
+attendance varchar(10),
+primary key (id),
+foreign key (user_id) references users(id),
+foreign key (company_id) references company_drives(id)
+);
+
+
+insert into attendance (user_id , company_id, attendance)
+values ( 1 , 1 , "present"),
+( 1 , 4 , "present"),
+( 1 , 6 , "present"),
+( 2 , 1 , "present"),
+( 2 , 2 , "present"),
+( 3 , 3 , "present"),
+( 3 , 4 , "present"),
+( 3 , 5 , "present"),
+( 3 , 6 , "present"),
+( 4 , 1 , "present"),
+( 5 , 2 , "present"),
+( 6 , 3 , "present"),
+( 6 , 6 , "present")
+
